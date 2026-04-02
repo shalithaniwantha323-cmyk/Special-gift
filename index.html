@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; background-color: #ffdae0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            z-index: 10; width: 85%; max-width: 350px;
+            transition: all 0.5s ease;
+        }
+
+        .profile-img {
+            width: 130px; height: 130px;
+            border-radius: 50%; object-fit: cover;
+            border: 5px solid #ff4d6d;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        h1 { color: #d63384; font-size: 1.5rem; margin-bottom: 10px; }
+        
+        #message { 
+            color: #444; font-size: 1.1rem; min-height: 60px;
+            line-height: 1.5; margin-bottom: 20px;
+            transition: opacity 0.5s;
+        }
+
+        .heart-btn {
+            background-color: #ff4d6d; color: white;
+            border: none; padding: 12px 25px;
+            font-size: 18px; border-radius: 50px;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            outline: none; -webkit-tap-highlight-color: transparent;
+        }
+
+        .heart-btn:active { transform: scale(0.9); }
+
+        .floating-heart {
+            position: absolute; bottom: -50px;
+            color: #ff4d6d; font-size: 25px;
+            animation: float 4s linear forwards;
+            z-index: 1; pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="img/PXL_20260331_051406084.MP.jpg" class="profile-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/833/833472.png'">
+        
+        <h1 id="title">ආදරණීය හෂීනිට... ❤️</h1>
+        <p id="message">ඔයා වෙනුවෙන් පොඩි Surprise එකක් තියෙනවා. බලන්න ඕනෙද? <br> පල්ලෙහා බටන් එක ක්ලික් කරන්න!</p>
+        
+        <button class="heart-btn" onclick="nextStep()">Click Me! ❤️</button>
+    </div>
+
+    <script>
+        let step = 0;
+        const messages = [
+            "ඔයා තමයි මගේ ජීවිතේ ලැබුණු ලස්සනම තෑග්ග! ❤️",
+            "හැමදාම සතුටින් මගේ ළඟින්ම ඉන්න... ✨",
+            "ඔයාගේ ඔය හිනාව මට ගොඩක් වටිනවා! 😍",
+            "මම ඔයාට ගොඩාක් ආදරෙයි මැණික! 💍",
+            "Click කරන එක නවත්තන්න එපා... තව තියෙනවා! 🥰",
+            "ඔයා මගේ ලෝකයයි! 🌎❤️"
+        ];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        function nextStep() {
+            // හාට්ස් ගොඩක් එන්න හදනවා
+            for(let i=0; i<5; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+
+            const msgElement = document.getElementById('message');
+            msgElement.style.opacity = 0;
+
+            setTimeout(() => {
+                if (step < messages.length) {
+                    msgElement.innerText = messages[step];
+                    step++;
+                } else {
+                    msgElement.innerHTML = "<b>දිගටම Click කරන්න!</b> <br> හාට්ස් පිරෙන්න දෙන්න! ❤️❤️❤️";
+                }
+                msgElement.style.opacity = 1;
+            }, 300);
+
+            // හැම ක්ලික් එකකදීම හාට්ස් වැස්සක් එන්න දිගටම function එක රන් කරනවා
+            if(step === 1) {
+                setInterval(createHeart, 500);
+            }
+        }
+    </script>
+</body>
+</html>
